@@ -1,0 +1,77 @@
+<div class="container">
+
+
+
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+
+
+        <div class="card">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="">
+              <i class="fas fa-basketball-ball"></i>
+            </div>
+            <h4 class="card-title mb-4">Gestión de Usuarios</h4>
+            <div class="row">
+              <div class="col-6">
+
+              </div>
+              <div class="col-6">
+                <button class="btn btn-info float-right" (click)="onCreate()">
+                  Parámetros de busqueda
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th class="font-weight-bold text-center">ID</th>
+                    <th class="font-weight-bold text-center">Nombre</th>
+                    <th class="font-weight-bold text-center">Rol</th>
+                    <th class="font-weight-bold text-center">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="users.length > 0">
+                  <tr *ngFor="let item of users">
+                    <td>{{ item.idUsuario }}</td>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.idRol }}</td>
+                    <td class="td-actions text-center">
+                      <button
+                        mat-raised-button
+                        matTooltip="Editar"
+                        matTooltipPosition="above"
+                        type="button"
+                        class="btn btn-warning btn-round btn-fab mr-2"
+                        (click)="onEdit(item)"
+                      >
+                        <span class="btn-label">
+                          <i class="material-icons">edit</i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
