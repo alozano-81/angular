@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
+import { Rol } from '../models/rol.models';
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class ConsultarService {
   environment:string = "http://localhost:8083";
   private path: string = '/users';
   usuarios: User[] = [];
+  roles: Rol[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +23,15 @@ export class ConsultarService {
     console.log(url);
     return this.http.get(url).pipe(
       tap((result: any) => (this.usuarios = result)),
+      map((result: any) => result)
+    );
+  }
+
+  getRoles(): Observable<Rol[]> {
+    let url = `${this.environment}${this.path}/get-roles`;
+    console.log(url);
+    return this.http.get(url).pipe(
+      tap((result: any) => (this.roles = result)),
       map((result: any) => result)
     );
   }

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { ConsultarService } from 'src/app/services/consultar.service';
 import { FormsModule } from '@angular/forms';
 import { noop } from '@angular/compiler/src/render3/view/util';
+import { Rol } from './models/rol.models';
 
 
 @Component({
@@ -15,6 +16,9 @@ export class AppComponent {
   title = 'pruebas';
 
   users: User[] = [];
+  roles: Rol[] = [];
+  rolselect:string = "";
+
   size: number = 10;
   search: string = 'null';
   pages: number[] = [];
@@ -36,17 +40,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.getUsers2();
-    /* this.paginationService.paginationEvent.subscribe((page) => {
-      this.page = page;
-      this.getUsers();
-    });
-    this.searchService.searchiEvent.subscribe((search) => {
-      this.search = search;
-      if (!search) {
-        this.search = 'null';
-      }
-      this.getUsers();
-    }); */
+    this.obtenerRoles();    
 
   }
 
@@ -89,12 +83,18 @@ export class AppComponent {
 
   guardar(id:any,nom:string,rol:any,sii:any,noo:any){
 
-    alert("ee: " +id+ " -- " +this.si+"--"+sii+ " -- " + this.nombreu + "" + nom);
-    this.service.insertarUsuario(1,this.nombreu,2,sii).subscribe((data) => {
+    alert("ee: " + rol);
+    this.service.insertarUsuario(1,this.nombreu,rol,sii).subscribe((data) => {
       this.getUsers2();
-    });
+      this.nombreu = "";
+    },
+    (data) =>{
+      window.location.reload();
+    },
+    );
 
-    this.nombreu = "";
+    
+   //
 
   }
 
@@ -102,17 +102,32 @@ export class AppComponent {
     alert("update: " +id+ " -- " +this.si+"--"+sii+ " -- " + this.nombreu + "-activo: -" + activo);
     this.service.actualizarUsuario(id,this.nombreu,sii,2).subscribe((data) => {
       this.getUsers2();
-    });
+    },
+    (data) =>{
+      window.location.reload();
+    },);
     this.nombreu = "";
   }
 
 
   eliminar(id:any){
-    alert("update: " +id);
-    this.service.eliminarUsuario(id).subscribe((data) => {
-      this.getUsers2();
+    
+    if(confirm("Está seguro querer eliminar este regitro?")){
+      this.service.eliminarUsuario(id).subscribe((data) => {
+        this.getUsers2();
+      },
+      (data) =>{
+        window.location.reload();
+      },);
+      this.nombreu = "";
+    }
+    
+  }
+
+  obtenerRoles(){
+    this.service.getRoles().subscribe((data) => {
+      this.roles = data;
     });
-    this.nombreu = "";
   }
 
 }
