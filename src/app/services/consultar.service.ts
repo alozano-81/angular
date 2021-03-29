@@ -24,4 +24,55 @@ export class ConsultarService {
       map((result: any) => result)
     );
   }
+
+  //*Insertar en usuario */
+  insertarUsuario(
+    id: any,
+    nombre: any,
+    rolid: any,
+    activo: any
+  ) {
+    let prodNombre = { id: id };
+    let itemToCreate = Object.assign(prodNombre);
+    let url = `${this.environment}${this.path}/crearUser/${id}/${nombre}/${rolid}/${activo}`;
+    return this.http.post(url, itemToCreate);
+  }
+  //*Fin insertar en necesidad */
+
+  //*actualizarUser en usuario */
+  actualizarUsuario(
+    id: any,
+    nombre: any,
+    rolid: any,
+    activo: any
+  ) {
+    let prodNombre = { id: id };
+    let itemToCreate = Object.assign(prodNombre);
+    let url = `${this.environment}${this.path}/actualizarUser/${id}/${nombre}/${rolid}/${activo}`;
+    return this.http.put(url, itemToCreate);
+  }
+  //*Fin actualizarUser en necesidad */
+
+  //*eliminarUser en usuario */
+  eliminarUsuario(
+    id: any
+  ) {
+    let prodNombre = { id: id };
+    let itemToCreate = Object.assign(prodNombre);
+    let url = `${this.environment}${this.path}/deleteUser/${id}`;
+    return this.http.delete(url, itemToCreate);
+  }
+  //*Fin eliminarUser en necesidad */
+
+  //consultar por nombre
+  consultarPorNombre(nombre:string): Observable<any> {
+    let url = `${this.environment}${this.path}/consultar-por-nombre/${nombre}`;
+    console.log(url);
+    return this.http.get(url).pipe(
+      tap((result: any) => (this.usuarios = result)),
+      map((result: any) => result)
+    );
+  }
+  // Fin consultar por nombre
+
 }
