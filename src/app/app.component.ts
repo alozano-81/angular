@@ -93,21 +93,16 @@ export class AppComponent {
 
 
   guardar(id:any,nom:string,rol:any,sii:any,noo:any){
-    if(sii){
-      alert("ok");
-    }
+    
     alert("ee: " + sii);
     this.service.insertarUsuario(1,this.nombreu,rol,sii).subscribe((data) => {
       this.getUsers2();
       this.nombreu = "";
     },
     (data) =>{
-     // window.location.reload();
+      window.location.reload();
     },
     );
-
-    
-   //
 
   }
 
