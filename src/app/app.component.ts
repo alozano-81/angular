@@ -5,6 +5,7 @@ import { ConsultarService } from 'src/app/services/consultar.service';
 import { FormsModule } from '@angular/forms';
 import { noop } from '@angular/compiler/src/render3/view/util';
 import { Rol } from './models/rol.models';
+import { $ } from 'protractor';
 
 
 @Component({
@@ -56,11 +57,16 @@ export class AppComponent {
     alert("Crear usuario");
   }
 
-  onEdit(id:any,nombre:any,rolid:any,activo:any){
+  onEdit(id:any,nombre:any,rolid:any,activo:any){console.log(activo);
     this.id = id;
-    this.nombreu = nombre;
-    //this.si = rolid;
-    this.si = activo;
+    this.nombreu = nombre;        
+    this.rolselect = rolid;
+    if(activo == 1){
+      this.si = 1;
+    }else{
+      this.no = 2;
+    }        
+   
   }
 
   consultar(nombre:string){
@@ -78,18 +84,25 @@ export class AppComponent {
 
   limpiar(){
     this.nombreBuscar="";
+    this.nombreu = "";
+    this.rolselect = "";
+    this.si = "";
+    this.no = "";
+    this.id = null;
   }
 
 
   guardar(id:any,nom:string,rol:any,sii:any,noo:any){
-
-    alert("ee: " + rol);
+    if(sii){
+      alert("ok");
+    }
+    alert("ee: " + sii);
     this.service.insertarUsuario(1,this.nombreu,rol,sii).subscribe((data) => {
       this.getUsers2();
       this.nombreu = "";
     },
     (data) =>{
-      window.location.reload();
+     // window.location.reload();
     },
     );
 

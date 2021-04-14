@@ -119,13 +119,13 @@
                         <legend class="col-form-label col-sm-2 pt-0">Activo</legend>
 
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" [(ngModel)]="si" name="activo" id="si1" value="1" checked>
+                            <input class="form-check-input" type="radio" [(ngModel)]="si" name="activo" id="si1" [value]="1" >
                             <label class="form-check-label" for="exampleRadios1">
                               Si
                             </label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" [(ngModel)]="si" name="activo" id="no2" value="2">
+                            <input class="form-check-input" type="radio" [(ngModel)]="si" name="activo" id="no2" [value]="2">
                             <label class="form-check-label" for="exampleRadios2">
                               No
                             </label>
@@ -167,4 +167,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<!--prueba de componente -->
+<div>
+  
+  <router-outlet></router-outlet>
 </div>
