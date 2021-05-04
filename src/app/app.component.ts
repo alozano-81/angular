@@ -41,7 +41,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.getUsers2();
-    this.obtenerRoles();    
+    this.obtenerRoles();
 
   }
 
@@ -57,16 +57,16 @@ export class AppComponent {
     alert("Crear usuario");
   }
 
-  onEdit(id:any,nombre:any,rolid:any,activo:any){console.log(activo);
+  onEdit(id:any,nombre:any,rolid:any,activo:any){
     this.id = id;
-    this.nombreu = nombre;        
+    this.nombreu = nombre;
     this.rolselect = rolid;
     if(activo == 1){
       this.si = 1;
     }else{
-      this.no = 2;
-    }        
-   
+      this.si = 2;
+    }
+
   }
 
   consultar(nombre:string){
@@ -93,7 +93,7 @@ export class AppComponent {
 
 
   guardar(id:any,nom:string,rol:any,sii:any,noo:any){
-    
+
     alert("ee: " + sii);
     this.service.insertarUsuario(1,this.nombreu,rol,sii).subscribe((data) => {
       this.getUsers2();
@@ -107,19 +107,21 @@ export class AppComponent {
   }
 
   actualizar(id:any,nom:string,rol:any,sii:any,activo:any){
-    alert("update: " +id+ " -- " +this.si+"--"+sii+ " -- " + this.nombreu + "-activo: -" + activo);
-    this.service.actualizarUsuario(id,this.nombreu,sii,2).subscribe((data) => {
-      this.getUsers2();
-    },
-    (data) =>{
-      window.location.reload();
-    },);
-    this.nombreu = "";
+    alert("update: " +id+ " -- " +this.si+"--"+sii+ " -- " + this.nombreu + " rol:  " + rol);
+    if(sii != undefined){
+      this.service.actualizarUsuario(id,this.nombreu,rol,sii).subscribe((data) => {
+        this.getUsers2();
+      },
+      (data) =>{
+        window.location.reload();
+      },);
+      this.nombreu = "";
+    }
   }
 
 
   eliminar(id:any){
-    
+
     if(confirm("Está seguro querer eliminar este regitro?")){
       this.service.eliminarUsuario(id).subscribe((data) => {
         this.getUsers2();
@@ -129,7 +131,7 @@ export class AppComponent {
       },);
       this.nombreu = "";
     }
-    
+
   }
 
   obtenerRoles(){
