@@ -58,10 +58,10 @@
                 </thead>
                 <tbody *ngIf="users.length > 0">
                   <tr *ngFor="let item of users">
-                    <td>{{ item.idUsuario }}</td>
-                    <td>{{ item.nombre }}</td>
-                    <td>{{ item.rolNombre }}</td>
-                    <td>{{ item.activo2 }}</td>
+                    <td>{{ item.usuaId }}</td>
+                    <td (click)="findName(item.nombre)">{{ item.nombre }}</td>
+                    <td>{{ item.role.nombre }}</td>
+                    <td>{{ item.activo }}</td>
                     <td class="td-actions text-center">
                       <button
                         mat-raised-button
@@ -69,7 +69,7 @@
                         matTooltipPosition="above"
                         type="button"
                         class="btn btn-warning btn-round btn-fab mr-2"
-                        (click)="onEdit(item.idUsuario,item.nombre,item.idRol,item.activo2)"
+                        (click)="onEdit(item.usuaId,item.nombre,item.role.idRol,item.activo)"
                       >
                         <span class="btn-label">
                           <i class="material-icons">Ver</i>

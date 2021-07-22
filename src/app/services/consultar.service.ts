@@ -19,7 +19,8 @@ export class ConsultarService {
   constructor(private http: HttpClient) { }
 
   listar2(): Observable<any> {
-    let url = `${this.environment}${this.path}/find/1`;
+    //let url = `${this.environment}${this.path}/find/1`;
+    let url = `${this.environment}${this.path}/findAll`;
     console.log(url);
     return this.http.get(url).pipe(
       tap((result: any) => (this.usuarios = result)),

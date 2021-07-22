@@ -75,7 +75,7 @@ export class AppComponent {
       this.users = [];
       this.service.consultarPorNombre(nombre).subscribe((list) => {
       this.users = list;
-    });
+      });
     }else{
       this.getUsers2();
     }
@@ -89,6 +89,7 @@ export class AppComponent {
     this.si = "";
     this.no = "";
     this.id = null;
+    this.getUsers2();
   }
 
 
@@ -138,6 +139,10 @@ export class AppComponent {
     this.service.getRoles().subscribe((data) => {
       this.roles = data;
     });
+  }
+
+  findName(nombreBuscar:string){
+    this.nombreBuscar = nombreBuscar;
   }
 
 }
